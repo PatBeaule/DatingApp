@@ -65,8 +65,12 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            
+            //THIS IS THE ORIGINAL CODE FROM neil, BUT THROWINS CROSS-ORIGIN ERROR
+            // app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            //This is the solution by Neil in the Q and A..and it worked
+            app.UseCors(x => x.WithOrigins("https://localhost:4200")
+                .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseAuthentication();
             app.UseAuthorization();
